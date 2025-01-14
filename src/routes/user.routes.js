@@ -50,6 +50,8 @@ router.post("/", upload.single("avatar"), async (req, res, next) => {
         error.status = 404;
         next(error);
     }
+    console.log(req.file?.path, ">>>>>>>>>")
+
     try {
         const salt = bcrypt.genSaltSync(10);
         const hash = bcrypt.hashSync(password, salt);
@@ -70,7 +72,7 @@ router.post("/", upload.single("avatar"), async (req, res, next) => {
     }
 });
 
-router.get("/", auth, async (req, res, next) => {
+router.get("/", async (req, res, next) => {
     try {
         // Parse limit and offset with default values
         const limit = parseInt(req.query.limit, 10) || 10; // Default limit: 10
